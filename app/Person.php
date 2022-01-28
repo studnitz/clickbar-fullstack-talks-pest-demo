@@ -29,6 +29,16 @@ class Person
 
     public function age(): int
     {
-        return $this->birthDay->diffInYears(today());
+        return $this->birthDay?->diffInYears(today()) ?? 0;
+    }
+
+    public function daysUntilBirthday(): int
+    {
+        $birthDayThisYear = $this->birthDay->setYear(today()->year);
+        $upcomingBirthday = $birthDayThisYear->endOfDay()->isPast()
+            ? $birthDayThisYear->addYear()
+            : $birthDayThisYear;
+
+        return $upcomingBirthday->diffInDays(today());
     }
 }
