@@ -12,6 +12,6 @@ class Person
 
     public function greet(): string
     {
-        return 'Hello, Max Mustermann!';
+        return "Hello, {$this->firstName} {$this->lastName}!";
     }
 }
