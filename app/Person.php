@@ -20,6 +20,10 @@ class Person
 
     public function greet(): string
     {
+        if ($this->birthDay?->isSameAs('m-d', today())) {
+            return "Happy Birthday, {$this->fullName()}!";
+        }
+
         return "Hello, {$this->fullName()}!";
     }
 
