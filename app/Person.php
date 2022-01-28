@@ -10,8 +10,13 @@ class Person
     )
     { }
 
+    public function fullName(): string
+    {
+        return "{$this->firstName} {$this->lastName}";
+    }
+
     public function greet(): string
     {
-        return "Hello, {$this->firstName} {$this->lastName}!";
+        return "Hello, {$this->fullName()}!";
     }
 }
