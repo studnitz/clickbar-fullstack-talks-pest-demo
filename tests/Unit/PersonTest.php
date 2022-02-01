@@ -43,3 +43,13 @@ it('gets the right days until the birthday when the day is one day after the bir
     $person = new Person('Max', 'Mustermann', CarbonImmutable::parse('1990-01-01'));
     $this->assertSame(364, $person->daysUntilBirthday());
 });
+
+it('set the last name of a person after creating them', function () {
+    $person = new Person('Max', 'Mustermann', CarbonImmutable::parse('1990-01-01'));
+
+    $this->assertSame('Mustermann', $person->lastName);
+
+    $person->setLastName('Musterbube');
+
+    $this->assertSame('Musterbube', $person->lastName);
+});

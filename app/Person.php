@@ -41,4 +41,9 @@ class Person
 
         return $upcomingBirthday->diffInDays(today());
     }
+
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
 }
