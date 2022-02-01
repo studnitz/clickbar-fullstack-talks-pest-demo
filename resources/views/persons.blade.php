@@ -21,12 +21,14 @@
 
             {{-- foreach persons as person --}}
 
+            @foreach ($persons as $person)
+
             <tr>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
                     <div class="text-sm text-gray-900">
                         {{-- Insert First name here --}}
-                        Max
+                        {{ $person->first_name }}
 
                     </div>
                 </div>
@@ -34,17 +36,17 @@
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
                     {{-- Insert Last name here --}}
-                    Mustermann
+                    {{ $person->last_name }}
 
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
                     {{-- Insert birthday here --}}
-                    <span>01.01.1990</span>
+                    <span>{{ $person->birthday->format('d.m.Y') }}</span>
 
-                    {{-- Insert days until birth --}}
-                    <span class="text-gray-600">(364 left)</span>
+                    {{-- Insert age --}}
+                    <span class="text-gray-600">({{ $person->age }} years)</span>
                 </div>
               </td>
               <td class="hidden px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -55,6 +57,7 @@
                 </td>
             </tr>
 
+            @endforeach
           </tbody>
         </table>
       </div>
