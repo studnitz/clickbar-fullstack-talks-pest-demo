@@ -29,6 +29,12 @@ Route::get('/persons', function () {
 });
 
 Route::post('/persons', function (Request $request) {
+    $request->validate([
+        'first_name' => ['required', 'string'],
+        'last_name' => ['required', 'string'],
+        'birthday' => ['required', 'date', 'before_or_equal:today'],
+    ]);
+
     $person = new Person();
     $person->first_name = $request->first_name;
     $person->last_name = $request->last_name;

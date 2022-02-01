@@ -46,3 +46,11 @@ it('creates a new person when posting to /persons', function () {
         'birthday' => '2000-01-01',
     ]);
 });
+
+it('throws a validation error when the birth date is in the future', function() {
+    post('/persons', [
+        'first_name' => 'Max',
+        'last_name' => 'Mustermann',
+        'birthday' => '3000-01-01',
+    ])->assertInvalid(['birthday' => 'The birthday must be a date before or equal to today.']);
+});
