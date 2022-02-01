@@ -4,15 +4,13 @@ use App\Person;
 use Carbon\CarbonImmutable;
 use function Spatie\PestPluginTestTime\testTime;
 
-test('max is greeted', function () {
-    $person = new Person('Max', 'Mustermann', CarbonImmutable::parse('1990-01-01'));
-    $this->assertSame('Hello, Max Mustermann!', $person->greet());
-});
-
-test('maria is greeted', function () {
-    $person = new Person('Maria', 'Musterfrau', CarbonImmutable::parse('1990-01-01'));
-    $this->assertSame('Hello, Maria Musterfrau!', $person->greet());
-});
+test('someone is greeted', function ($firstName, $lastName, $greeting) {
+    $person = new Person($firstName, $lastName, CarbonImmutable::parse('1990-01-01'));
+    expect($person->greet())->toBe($greeting);
+})->with([
+    ['Max', 'Mustermann', 'Hello, Max Mustermann!'],
+    ['Maria', 'Musterfrau', 'Hello, Maria Musterfrau!'],
+]);
 
 it('can get the right age for Max', function() {
     testTime()->freeze('2022-02-01 01:00:00');
