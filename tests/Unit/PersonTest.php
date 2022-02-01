@@ -47,9 +47,9 @@ it('gets the right days until the birthday when the day is one day after the bir
 it('set the last name of a person after creating them', function () {
     $person = new Person('Max', 'Mustermann', CarbonImmutable::parse('1990-01-01'));
 
-    $this->assertSame('Mustermann', $person->lastName);
+    expect($person->lastName)->toBe('Mustermann');
 
     $person->setLastName('Musterbube');
 
-    $this->assertSame('Musterbube', $person->lastName);
+    expect($person->lastName)->toBe('Musterbube');
 });
