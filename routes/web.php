@@ -28,6 +28,10 @@ Route::get('/persons', function () {
     ]);
 });
 
+Route::get('/persons/create', function () {
+    return view('persons.create');
+});
+
 Route::post('/persons', function (Request $request) {
     $request->validate([
         'first_name' => ['required', 'string'],
