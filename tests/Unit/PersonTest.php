@@ -6,10 +6,10 @@ use function Spatie\PestPluginTestTime\testTime;
 
 test('someone is greeted', function ($firstName, $lastName, $names, $birthday, $isBirthday) {
     $person = new Person($firstName, $lastName, $birthday);
-    expect($person->greet())->toContain($names);
+    expect($person)->greet()->toContain($names)->lastName->toBe($lastName);
 
     $expectedGreeting = $isBirthday ? 'Happy Birthday' : 'Hello';
-    expect($person->greet())->toContain($expectedGreeting);
+    expect($person)->greet()->toContain($expectedGreeting);
 })->with([
     ['Max', 'Mustermann', 'Max Mustermann!'],
     ['Maria', 'Musterfrau', 'Maria Musterfrau!'],
@@ -52,9 +52,9 @@ it('gets the right days until the birthday when the day is one day after the bir
 it('set the last name of a person after creating them', function () {
     $person = new Person('Max', 'Mustermann', CarbonImmutable::parse('1990-01-01'));
 
-    expect($person->lastName)->toBe('Mustermann');
+    expect($person)->lastName->toBe('Mustermann')->firstName->toBe('Max');
 
     $person->setLastName('Musterbube');
 
-    expect($person->lastName)->toBe('Musterbube');
+    expect($person)->lastName->toBe('Musterbube')->firstName->toBe('Max');
 });
