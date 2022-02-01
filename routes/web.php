@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Person;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +26,14 @@ Route::get('/persons', function () {
     return view('persons', [
         'persons' => $persons,
     ]);
+});
+
+Route::post('/persons', function (Request $request) {
+    $person = new Person();
+    $person->first_name = $request->first_name;
+    $person->last_name = $request->last_name;
+    $person->birthday = Carbon::parse($request->birthday);
+    $person->save();
+
+    return redirect('/persons');
 });

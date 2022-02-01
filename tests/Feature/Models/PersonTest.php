@@ -3,7 +3,10 @@
 use App\Models\Person;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
+use function Pest\Laravel\assertDatabaseCount;
+use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
 uses(LazilyRefreshDatabase::class);
 
@@ -27,4 +30,19 @@ it('shows the details of multiple persons', function () {
             $person1->first_name, $person1->last_name, $person1->age,
             $person2->first_name, $person2->last_name, $person2->age,
         ]);
+});
+
+it('creates a new person when posting to /persons', function () {
+    post('/persons', [
+        'first_name' => 'Max',
+        'last_name' => 'Mustermann',
+        'birthday' => '2000-01-01',
+    ]);
+
+    assertDatabaseCount('people', 1);
+    assertDatabaseHas('people', [
+        'first_name' => 'Max',
+        'last_name' => 'Mustermann',
+        'birthday' => '2000-01-01',
+    ]);
 });
