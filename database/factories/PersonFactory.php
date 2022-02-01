@@ -14,7 +14,9 @@ class PersonFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'birthday' => $this->faker->dateTimeBetween('-30 years', '-15years'),
         ];
     }
 }
